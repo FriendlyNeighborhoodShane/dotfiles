@@ -1,0 +1,21 @@
+[alias]
+	pcmf = reflog expire --all --expire-unreachable=all --rewrite
+	graph = log --all --graph --oneline
+	pushf = !git push --force-with-lease
+[user]
+	name = FriendlyNeighborhoodShane
+	email = shane.880088.supw@gmail.com
+[core]
+	autocrlf = input
+[init]
+	templateDir =
+[credential]
+	helper = 
+[pull]
+	ff = only
+[push]
+	autoSetupRemote = true
+[rebase]
+	autoStash = true
+[merge]
+	conflictStyle = zdiff3
