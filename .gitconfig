@@ -1,0 +1,14 @@
+[alias]
+	pcmf = reflog expire --all --expire-unreachable=all --rewrite
+	graph = log --all --graph --oneline
+[user]
+	name = FriendlyNeighborhoodShane
+	email = shane.880088.supw@gmail.com
+[core]
+	autocrlf = input
+[init]
+	templateDir =
+[credential]
+	helper = 
+[pull]
+	ff = only
