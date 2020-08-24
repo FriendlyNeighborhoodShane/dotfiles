@@ -1,0 +1,20 @@
+[alias]
+	pcmf = reflog expire --all --expire-unreachable=all --rewrite
+	graph = log --all --graph --oneline
+	pushf = !git push --force-with-lease
+[core]
+	autocrlf = input
+[init]
+	templateDir =
+[credential]
+	helper = 
+[pull]
+	ff = only
+[push]
+	autoSetupRemote = true
+[rebase]
+	autoStash = true
+[merge]
+	conflictStyle = zdiff3
+[include]
+    path = ~/.config/gitconfig-local
