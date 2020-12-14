@@ -26,5 +26,10 @@ sshup() {
   ssh-add -- "$@";
 }
 
+# Add PWD to PATH
+pathit() {
+  export PATH="$PATH:${1:-$PWD}";
+}
+
 # Import misc config
 for prof in "$HOME/.config"/profile_*; do [ -f "$prof" ] && . "$prof"; done;
