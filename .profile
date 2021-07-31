@@ -19,6 +19,10 @@ alias config="git --git-dir='$HOME/.githome' --work-tree='$HOME'";
 
 }
 
+# Shadowed commands
+command -v sh >/dev/null 2>/dev/null || alias sh="busybox sh";
+command -v vi >/dev/null 2>/dev/null || alias vi="busybox vi";
+
 # Import misc config
 for prof in "$HOME/.config"/profile_*; do [ -f "$prof" ] && . "$prof"; done;
 
