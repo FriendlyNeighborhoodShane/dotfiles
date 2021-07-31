@@ -15,5 +15,9 @@ export CFLAGS="-O3 -pipe";
 export CXXFLAGS="-O3 -pipe";
 export MAKEFLAGS="-j$(( $(nproc) - 1 ))";
 
+# Shadowed commands
+command -v sh >/dev/null 2>/dev/null || alias sh="busybox sh";
+command -v vi >/dev/null 2>/dev/null || alias vi="busybox vi";
+
 # Import misc config
 for prof in "$HOME/.config"/profile_*; do [ -f "$prof" ] && . "$prof"; done;
