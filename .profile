@@ -23,6 +23,13 @@ alias config="git --git-dir='$HOME/.githome' --work-tree='$HOME'";
 command -v sh >/dev/null 2>/dev/null || alias sh="busybox sh";
 command -v vi >/dev/null 2>/dev/null || alias vi="busybox vi";
 
+# SSH setup
+sshup() {
+  [ "$SSH_AGENT_PID" ] || eval "$(ssh-agent -s)";
+  [ "$#" -eq "0" ] && set -- "$HOME/.ssh/id_git";
+  ssh-add -- "$@";
+}
+
 # Import misc config
 for prof in "$HOME/.config"/profile_*; do [ -f "$prof" ] && . "$prof"; done;
 
