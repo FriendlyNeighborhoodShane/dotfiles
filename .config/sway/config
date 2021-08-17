@@ -1,0 +1,123 @@
+# sway config
+
+# variables
+set {
+
+    $mod    Mod4
+    $term   alacritty
+    $menu   wofi --show=run
+
+}
+
+# wallpaper
+exec swaybg -m fit -i $HOME/Pictures/background.png
+
+# status bar
+bar {
+    position top
+    status_command while date +'%Y-%m-%d %H:%M:%S'; do sleep 1; done
+    colors {
+        statusline #ffffff
+        background #323232
+        inactive_workspace #32323200 #32323200 #5c5c5c
+    }
+}
+
+# key bindings
+
+floating_modifier $mod normal
+
+bindsym {
+
+    $mod+Return     exec $term
+    $mod+Shift+q    kill
+    $mod+d exec     $menu
+    $mod+Shift+c    reload
+    $mod+Shift+e    exit
+
+    $mod+Left       focus left
+    $mod+Down       focus down
+    $mod+Up         focus up
+    $mod+Right      focus right
+
+    $mod+1      workspace number 1
+    $mod+2      workspace number 2
+    $mod+3      workspace number 3
+    $mod+4      workspace number 4
+    $mod+5      workspace number 5
+    $mod+6      workspace number 6
+    $mod+7      workspace number 7
+    $mod+8      workspace number 8
+    $mod+9      workspace number 9
+    $mod+0      workspace number 10
+
+    $mod+f              fullscreen
+    $mod+Shift+space    floating toggle
+    $mod+space          focus mode_toggle
+    $mod+a              focus parent
+    $mod+z              focus child
+
+    # move containers
+    $mod+Shift+1    move container to workspace number 1
+    $mod+Shift+2    move container to workspace number 2
+    $mod+Shift+3    move container to workspace number 3
+    $mod+Shift+4    move container to workspace number 4
+    $mod+Shift+5    move container to workspace number 5
+    $mod+Shift+6    move container to workspace number 6
+    $mod+Shift+7    move container to workspace number 7
+    $mod+Shift+8    move container to workspace number 8
+    $mod+Shift+9    move container to workspace number 9
+    $mod+Shift+0    move container to workspace number 10
+
+    $mod+Shift+Left     move left
+    $mod+Shift+Down     move down
+    $mod+Shift+Up       move up
+    $mod+Shift+Right    move right
+
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    $mod+b      splith
+    $mod+v      splitv
+
+    $mod+Shift+minus    move scratchpad
+    $mod+minus          scratchpad show
+
+    $mod+comma      exec swaymsg "output * dpms off"
+    $mod+period     exec swaymsg "output * dpms on"
+
+    $mod+F1     exec pactl set-sink-mute 0 toggle
+    $mod+F2     exec pactl set-sink-volume 0 -5%
+    $mod+F3     exec pactl set-sink-volume 0 +5%
+    $mod+F4     exec pactl set-source-mute 0 toggle
+    $mod+F5     exec brightnessctl set 5%-
+    $mod+F6     exec brightnessctl set +5%
+
+}
+
+# modifying containers
+mode "modify" {
+    bindsym {
+
+        # change container size
+        Left    resize shrink width  10px
+        Down    resize grow   height 10px
+        Up      resize shrink height 10px
+        Right   resize grow   width  10px
+
+        # Switch the current container between different layout styles
+        $mod+s      layout stacking
+        $mod+w      layout tabbed
+        $mod+e      layout toggle split
+
+        Return      mode "default"
+        Escape      mode "default"
+
+    }
+}
+bindsym $mod+r mode "modify"
+
+gaps inner 10
+
+# Custom confs
+include ~/.config/sway/config_*
