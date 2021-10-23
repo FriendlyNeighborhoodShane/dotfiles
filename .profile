@@ -12,6 +12,11 @@ alias config="git --git-dir='$HOME/.githome' --work-tree='$HOME'";
   export EDITOR="nano";
   export LESS="RS";
 
+  # Compiler configuration
+  export CFLAGS="-O3 -pipe";
+  export CXXFLAGS="-O3 -pipe";
+  export MAKEFLAGS="-j$(( $(nproc) - 1 ))";
+
 }
 
 # Import misc config
