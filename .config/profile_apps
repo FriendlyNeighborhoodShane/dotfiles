@@ -1,0 +1,56 @@
+# Config for apps
+
+# Random aliases
+alias bat="bat --wrap=never";
+alias gg="git grep --no-index";
+
+# Color palette
+# Argonaut by paleta
+p() {
+  cat <<end_of_data | base64 -d;
+G103MDg7IzBlMTAxORtcG10xMjsjZmZmYWY0G1wbXTQ7MDsjMj
+MyMzIzG1wbXTExOyMwZTEwMTkbXBtdNDsxOyNmZjAwMGYbXBtd
+NDsyOyM4Y2UxMGIbXBtdNDszOyNmZmI5MDAbXBtdNDs0OyMwMD
+hkZjgbXBtdNDs1OyM2ZDQzYTYbXBtdNDs2OyMwMGQ4ZWIbXBtd
+NDs3OyNmZmZmZmYbXBtdNDs4OyM0NDQ0NDQbXBtdNDs5OyNmZj
+I3NDAbXBtdNDsxMDsjYWJlMTViG1wbXTQ7MTE7I2ZmZDI0Mhtc
+G100OzEyOyMwMDkyZmYbXBtdNDsxMzsjOWE1ZmViG1wbXTQ7MT
+Q7IzY3ZmZmMBtcG100OzE1OyNmZmZmZmYbXBtdMTA7I2ZmZmFm
+NBtc
+end_of_data
+}; p;
+
+# NNN config
+export NNN_OPTS="dHou";
+export NNN_PLUG='l:!less -- $nnn;i:!termimage -s60x60 $nnn;';
+
+# rc functions for MinMicroG download stats using github REST API
+
+# Curls releases endpoint and splices data to the neccesary keys
+ghdls() {
+  [ "$1" ] || return 1;
+  local relurl="https://api.github.com/repos/$1/releases";
+  local prog='
+  [
+    if $i != "" and ( ($i|tonumber?) // null ) == null then
+      .[]
+    else
+      .[ ($i|tonumber?) // 0 ]
+    end | {
+      name,
+      tag_name,
+      download_count: [.assets[].download_count] | add,
+      assets: [ .assets[] | { name, download_count } ]
+    }
+  ]
+';
+  curl "-#" "$relurl" | jq -r --arg i "$2" "$prog";
+}
+
+mmgdls() {
+  ghdls "FriendlyNeighborhoodShane/MinMicroG_releases" "$1";
+}
+
+mmgcidls() {
+  ghdls "FriendlyNeighborhoodShane/MinMicroG-abuse-ci" "$1";
+}
