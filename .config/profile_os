@@ -1,0 +1,24 @@
+# OS-specific config
+
+case "$(grep '^NAME=' /etc/os-release 2>/dev/null)" in
+  *"KISS Linux"*)
+    export KISS_PATH="$HOME/.local/kiss_repo/core:$HOME/.local/kiss_repo/extra:$HOME/.local/kiss_repo/wayland:$HOME/.local/kiss_community/community";
+    export KISS_TMPDIR="/tmp/.kiss";
+    export XDG_RUNTIME_DIR="/tmp/.xdg_runtime";
+    [ -e "$XDG_RUNTIME_DIR" ] || mkdir "$XDG_RUNTIME_DIR";
+  ;;
+  *"Arch Linux"*)
+  ;;
+  *)
+    case "$(uname)" in
+      *"MSYS_NT"*)
+        scoopup() {
+          scoop update; scoop status;
+          scoop update '*'; scoop cleanup -k '*';
+        }
+      ;;
+      *)
+      ;;
+    esac;
+  ;;
+esac;
