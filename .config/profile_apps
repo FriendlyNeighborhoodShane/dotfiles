@@ -1,5 +1,11 @@
 # Config for apps
 
+# Nix
+if [ -e "$HOME/.nix-profile/etc/profile.d/nix.sh" ]; then
+  . "$HOME/.nix-profile/etc/profile.d/nix.sh";
+  export XDG_DATA_DIRS="$HOME/.nix-profile/share/$XDG_DATA_DIRS";
+fi;
+
 # Random aliases
 alias bat="bat --wrap=never";
 alias gg="git grep --no-index";
